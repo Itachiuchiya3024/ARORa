@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard — Aarogya Orbit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/patient.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <aside class="sidebar" data-ao-sidebar></aside>
+  <div class="main-area">
+    <div data-ao-mobile-nav></div>
+    <div class="topbar">
+      <h1 id="dash-greeting">Welcome back</h1>
+      <div class="topbar-actions">
+        <div class="orbit-hero small" aria-hidden="true" style="margin-right:2px;">
+          <div class="ring r1"></div><div class="ring r2"></div>
+          <div class="orbit-core" style="inset:32%;"></div>
+        </div>
+        <span class="mode-tag" id="topbar-mode-tag"></span>
+        <button class="btn btn-danger btn-sm" id="help-btn">Help</button>
+      </div>
+    </div>
+    <main id="main" class="page-content">
+
+      <section class="card" style="margin-bottom:24px;">
+        <h3>Your experience mode</h3>
+        <p class="text-muted">Aarogya Orbit adapts its look and language to who's using it.</p>
+        <div class="mode-switcher" id="mode-switcher-container"></div>
+      </section>
+
+      <section id="junior-buddy" class="junior-buddy bounce-in" style="display:none; margin-bottom:24px;">
+        <div class="buddy-wrap wiggle">
+          <svg viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="60" cy="108" rx="26" ry="6" fill="#00000014"/>
+            <circle cx="60" cy="30" r="9" fill="#FF9A5A"/>
+            <rect x="57" y="14" width="6" height="16" rx="3" fill="#FF9A5A"/>
+            <path d="M28 60c0-22 14-38 32-38s32 16 32 38-10 44-32 44-32-22-32-44Z" fill="#8C6BFF"/>
+            <ellipse cx="60" cy="60" rx="26" ry="30" fill="#B7A2FF"/>
+            <circle cx="47" cy="58" r="9" fill="#fff"/>
+            <circle cx="73" cy="58" r="9" fill="#fff"/>
+            <circle cx="48.5" cy="59.5" r="4.2" fill="#2C2560"/>
+            <circle cx="74.5" cy="59.5" r="4.2" fill="#2C2560"/>
+            <circle cx="46.5" cy="57.5" r="1.4" fill="#fff"/>
+            <circle cx="72.5" cy="57.5" r="1.4" fill="#fff"/>
+            <path d="M50 76c4 5 16 5 20 0" stroke="#2C2560" stroke-width="3.4" stroke-linecap="round"/>
+            <circle cx="38" cy="70" r="5" fill="#FFB39A" opacity=".8"/>
+            <circle cx="82" cy="70" r="5" fill="#FFB39A" opacity=".8"/>
+            <path d="M20 78c-6 4-8 12-4 18" stroke="#8C6BFF" stroke-width="6" stroke-linecap="round"/>
+            <path d="M100 78c6 4 8 12 4 18" stroke="#8C6BFF" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Hi! I'm Orbie, your space buddy 🚀</h3>
+          <p class="mb-0">Ready for your check-up adventure? Tap "Start Health Check" and let's tell the doctor how you feel!</p>
+        </div>
+      </section>
+
+      <section class="grid grid-4 bounce-in" id="dash-stats" style="margin-bottom:24px;"></section>
+
+      <section style="margin-bottom:24px;">
+        <h3>Quick actions</h3>
+        <div class="quick-actions">
+          <a class="quick-action bounce-in" href="case-taking.html"><span class="qa-icon"></span><span class="qa-title">Start Health Check</span><small>Talk to ORBIT</small></a>
+          <a class="quick-action bounce-in" style="animation-delay:.05s" href="timeline.html"><span class="qa-icon"></span><span class="qa-title">Health Timeline</span><small>Your journey so far</small></a>
+          <a class="quick-action bounce-in" style="animation-delay:.1s" href="appointments.html"><span class="qa-icon"></span><span class="qa-title">Appointments</span><small>Upcoming & follow-ups</small></a>
+          <a class="quick-action bounce-in" style="animation-delay:.15s" href="prescriptions.html"><span class="qa-icon"></span><span class="qa-title">Treatment</span><small>Prescriptions & plans</small></a>
+          <a class="quick-action bounce-in" style="animation-delay:.2s" href="reports.html"><span class="qa-icon"></span><span class="qa-title">Reports</span><small>Upload & view</small></a>
+        </div>
+      </section>
+
+      <section class="grid grid-sidebar">
+        <div class="card">
+          <h3>Recent timeline</h3>
+          <div id="dash-timeline-preview"></div>
+          <a href="timeline.html" class="btn btn-ghost btn-sm" style="margin-top:8px;">View full timeline →</a>
+        </div>
+        <div class="card">
+          <h3>Next appointment</h3>
+          <div id="dash-next-appt"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/patient.js"></script>
+<script>
+  aoRenderPatientDashboard();
+  const s = AoSession.get();
+  if(s) document.getElementById("topbar-mode-tag").textContent =
+    s.mode === "junior" ? "Junior Care" : s.mode === "youth" ? "Youth Mode" : "Classic Care";
+  document.querySelectorAll(".qa-icon").forEach((el,i) => {
+    const icons = [AoIcon.chat, AoIcon.timeline, AoIcon.calendar, AoIcon.pill, AoIcon.reports];
+    el.innerHTML = icons[i];
+  });
+  document.getElementById("help-btn").addEventListener("click", aoTriggerHelp);
+</script>
+</body>
+</html>

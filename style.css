@@ -1,0 +1,184 @@
+/* =========================================================
+   Aarogya Orbit — Design Tokens & Base Styles
+   Palette: deep space navy + orbit indigo + turmeric gold
+   (turmeric gold nods to AYUSH / Ayurveda without cliché)
+   ========================================================= */
+
+:root{
+  /* Color */
+  --ink:            #12172B;
+  --ink-soft:        #1B2140;
+  --surface:         #FFFFFF;
+  --surface-2:       #F6F7FB;
+  --surface-3:       #ECEEF7;
+  --line:            #DFE2F0;
+  --text:            #171B34;
+  --text-muted:      #6B7093;
+  --text-inverse:    #EEF0FA;
+
+  --accent:          #4A5CE0;   /* orbit indigo */
+  --accent-strong:   #34409E;
+  --accent-tint:     #EEF0FD;
+  --gold:            #C8862A;   /* turmeric — AYUSH accent */
+  --gold-tint:       #FBF1E1;
+  --success:         #227A5B;
+  --success-tint:    #E4F3EC;
+  --danger:          #B23A30;
+  --danger-tint:     #FBEAE8;
+  --warn:            #9A6B12;
+  --warn-tint:       #FBF0DA;
+
+  /* Type */
+  --font-display: "Sora", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+
+  /* Radius / shadow */
+  --r-sm: 8px;
+  --r-md: 14px;
+  --r-lg: 22px;
+  --r-pill: 999px;
+  --shadow-soft: 0 1px 2px rgba(18,23,43,.06), 0 8px 24px rgba(18,23,43,.06);
+  --shadow-lift: 0 4px 10px rgba(18,23,43,.08), 0 20px 40px rgba(18,23,43,.10);
+
+  --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+  --space-5: 24px; --space-6: 32px; --space-7: 48px; --space-8: 64px;
+}
+
+[data-theme="dark"]{
+  --surface:        #171B34;
+  --surface-2:       #12172B;
+  --surface-3:       #1F2547;
+  --line:            #2B3260;
+  --text:            #EDEFFA;
+  --text-muted:      #A2A8CF;
+  --accent-tint:     #232B5C;
+  --gold-tint:       #2E2413;
+  --success-tint:    #16342A;
+  --danger-tint:     #33201E;
+  --warn-tint:       #322710;
+}
+
+*{ box-sizing: border-box; }
+html,body{ margin:0; padding:0; }
+body{
+  font-family: var(--font-body);
+  background: var(--surface-2);
+  color: var(--text);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+h1,h2,h3,h4{
+  font-family: var(--font-display);
+  margin: 0 0 var(--space-2) 0;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+h1{ font-size: 2rem; font-weight: 600; }
+h2{ font-size: 1.5rem; font-weight: 600; }
+h3{ font-size: 1.15rem; font-weight: 600; }
+p{ margin: 0 0 var(--space-3) 0; color: var(--text); }
+a{ color: var(--accent); text-decoration: none; }
+a:hover{ text-decoration: underline; }
+small{ color: var(--text-muted); }
+button{ font-family: var(--font-body); }
+
+img, svg{ max-width: 100%; display:block; }
+
+.container{ max-width: 1180px; margin: 0 auto; padding: 0 var(--space-5); perspective: 1500px; }
+
+/* ---------- Buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap: var(--space-2);
+  padding: 11px 20px; border-radius: var(--r-md);
+  font-weight: 600; font-size: .95rem; cursor:pointer;
+  border: 1px solid transparent; transition: transform .12s ease, box-shadow .12s ease, background .15s ease;
+  white-space: nowrap;
+}
+.btn:active{ transform: translateY(1px); }
+.btn:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+.btn-primary{ background: var(--accent); color: #fff; }
+.btn-primary:hover{ background: var(--accent-strong); }
+.btn-gold{ background: var(--gold); color: #fff; }
+.btn-secondary{ background: var(--surface); color: var(--text); border-color: var(--line); }
+.btn-secondary:hover{ border-color: var(--accent); color: var(--accent); }
+.btn-ghost{ background: transparent; color: var(--text-muted); }
+.btn-ghost:hover{ color: var(--text); background: var(--surface-3); }
+.btn-danger{ background: var(--danger); color:#fff; }
+.btn-block{ width:100%; }
+.btn-sm{ padding: 7px 14px; font-size: .85rem; border-radius: var(--r-sm); }
+.btn[disabled]{ opacity:.5; cursor:not-allowed; }
+
+/* ---------- Forms ---------- */
+label{ display:block; font-size: .85rem; font-weight: 600; color: var(--text-muted); margin-bottom: var(--space-1); }
+input, select, textarea{
+  width:100%; padding: 11px 14px; border-radius: var(--r-sm);
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  font-family: var(--font-body); font-size: .95rem;
+}
+input:focus, select:focus, textarea:focus{ outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.field{ margin-bottom: var(--space-4); }
+.field-hint{ font-size: .8rem; color: var(--text-muted); margin-top: 4px; }
+.error-text{ color: var(--danger); font-size: .82rem; margin-top: 4px; }
+.range-row{ display:flex; align-items:center; gap: var(--space-3); }
+.pill-group{ display:flex; flex-wrap:wrap; gap: var(--space-2); }
+.pill-choice{
+  padding: 8px 16px; border-radius: var(--r-pill); border: 1px solid var(--line);
+  background: var(--surface); cursor:pointer; font-size: .88rem; font-weight: 500;
+}
+.pill-choice.active{ background: var(--accent-tint); border-color: var(--accent); color: var(--accent-strong); font-weight: 600; }
+
+/* ---------- Cards ---------- */
+.card{
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: var(--r-md); padding: var(--space-5); box-shadow: var(--shadow-soft);
+}
+.card-flat{ background: var(--surface); border: 1px solid var(--line); border-radius: var(--r-sm); padding: var(--space-4); }
+.card-hero{ border-radius: var(--r-lg); box-shadow: var(--shadow-lift); }
+
+.badge{ display:inline-flex; align-items:center; gap:6px; padding: 3px 10px; border-radius: var(--r-pill); font-size: .75rem; font-weight: 700; }
+.badge-accent{ background: var(--accent-tint); color: var(--accent-strong); }
+.badge-gold{ background: var(--gold-tint); color: var(--gold); }
+.badge-success{ background: var(--success-tint); color: var(--success); }
+.badge-danger{ background: var(--danger-tint); color: var(--danger); }
+.badge-warn{ background: var(--warn-tint); color: var(--warn); }
+.badge-muted{ background: var(--surface-3); color: var(--text-muted); }
+
+.divider{ height:1px; background: var(--line); border:none; margin: var(--space-4) 0; }
+
+/* ---------- Toast ---------- */
+#ao-toast-region{ position: fixed; bottom: 20px; right: 20px; z-index: 9999; display:flex; flex-direction:column; gap: 10px; }
+.ao-toast{
+  background: var(--ink); color: #fff; padding: 12px 18px; border-radius: var(--r-sm);
+  box-shadow: var(--shadow-lift); font-size: .88rem; max-width: 320px;
+  animation: ao-toast-in .18s ease-out;
+}
+.ao-toast.success{ background: var(--success); }
+.ao-toast.error{ background: var(--danger); }
+@keyframes ao-toast-in{ from{ opacity:0; transform: translateY(8px); } to{ opacity:1; transform:none; } }
+
+/* ---------- Modal ---------- */
+.ao-modal-backdrop{
+  position: fixed; inset:0; background: rgba(18,23,43,.5); display:flex; align-items:center; justify-content:center;
+  z-index: 9998; padding: var(--space-4);
+}
+.ao-modal{ background: var(--surface); border-radius: var(--r-lg); padding: var(--space-6); max-width: 480px; width:100%; box-shadow: var(--shadow-lift); }
+
+/* ---------- Empty / loading states ---------- */
+.empty-state{ text-align:center; padding: var(--space-7) var(--space-4); color: var(--text-muted); }
+.empty-state svg{ margin: 0 auto var(--space-3); opacity:.5; }
+.loading-dots{ display:inline-flex; gap:4px; }
+.loading-dots span{ width:6px; height:6px; border-radius:50%; background: var(--accent); animation: ao-blink 1.1s infinite ease-in-out; }
+.loading-dots span:nth-child(2){ animation-delay: .15s; }
+.loading-dots span:nth-child(3){ animation-delay: .3s; }
+@keyframes ao-blink{ 0%,80%,100%{ opacity:.25; } 40%{ opacity:1; } }
+
+/* ---------- Skip link / accessibility ---------- */
+.skip-link{ position:absolute; left:-9999px; top:0; background:var(--accent); color:#fff; padding:8px 14px; border-radius: 0 0 8px 0; }
+.skip-link:focus{ left:0; z-index: 10000; }
+:focus-visible{ outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.text-muted{ color: var(--text-muted); }
+.mt-0{ margin-top:0; } .mb-0{ margin-bottom:0; }
+.flex{ display:flex; } .items-center{ align-items:center; } .justify-between{ justify-content:space-between; }
+.gap-2{ gap: var(--space-2); } .gap-3{ gap: var(--space-3); } .gap-4{ gap: var(--space-4); }

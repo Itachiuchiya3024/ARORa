@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aarogya Orbit — One patient. One record. One connected care journey.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<style>
+  body{ background: radial-gradient(circle at 20% -10%, #E9ECFB 0%, #F6F7FB 45%); }
+  .landing-hero{ min-height:100vh; display:flex; flex-direction:column; }
+  .landing-nav{ display:flex; align-items:center; justify-content:space-between; padding: 22px 0; }
+  .landing-brand{ display:flex; align-items:center; gap:10px; font-family:var(--font-display); font-weight:700; font-size:1.15rem; }
+  .landing-main{ flex:1; display:grid; grid-template-columns: 1.1fr .9fr; gap: 48px; align-items:center; padding: 40px 0 60px; }
+  .landing-copy .eyebrow{ color: var(--accent-strong); font-weight:700; font-size:.85rem; margin-bottom:10px; }
+  .landing-copy h1{ font-size: 2.6rem; max-width: 520px; }
+  .landing-copy p.lead{ font-size:1.05rem; color: var(--text-muted); max-width:480px; }
+  .principle-row{ display:flex; gap: 20px; margin-top: 28px; flex-wrap:wrap; }
+  .principle-row .pr{ font-size:.85rem; color: var(--text-muted); }
+  .principle-row .pr strong{ display:block; color: var(--text); font-family: var(--font-display); font-size:1.3rem; }
+  .login-card{ max-width: 420px; margin-left:auto; }
+  .role-tabs{ display:flex; gap:8px; margin-bottom: 20px; }
+  .role-tab{ flex:1; padding:10px; border-radius: var(--r-sm); border:1px solid var(--line); background:#fff; cursor:pointer; text-align:center; font-weight:600; font-size:.88rem; }
+  .role-tab.active{ background: var(--accent); color:#fff; border-color:var(--accent); }
+  .demo-note{ font-size:.78rem; color: var(--text-muted); background: var(--surface-3); border-radius: var(--r-sm); padding: 10px 12px; margin-top: 14px; }
+  .demo-note code{ background:#fff; padding:1px 5px; border-radius:4px; }
+  footer.landing-footer{ text-align:center; padding: 18px 0; color: var(--text-muted); font-size:.8rem; }
+  .hero-visual{ display:flex; align-items:center; justify-content:center; margin: 20px 0 30px; }
+  @media (max-width: 860px){ .landing-main{ grid-template-columns: 1fr; } .login-card{ margin: 0; max-width:100%; } .landing-copy h1{ font-size:2rem; } }
+</style>
+</head>
+<body>
+<div class="container landing-hero">
+  <div class="landing-nav">
+    <div class="landing-brand">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A5CE0" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="4.2"/><ellipse cx="12" cy="12" rx="4.2" ry="10" transform="rotate(45 12 12)"/></svg>
+      Aarogya Orbit
+    </div>
+    <span class="badge badge-warn">Demo environment — not for real patient data</span>
+  </div>
+
+  <div class="landing-main">
+    <div class="landing-copy">
+      <div class="eyebrow">SIH26047 · Ministry of Ayush · Patient Case-Taking Software</div>
+      <h1>One patient. One record. <span class="gradient-text">One connected care journey.</span></h1>
+      <p class="lead">Aarogya Orbit connects patients, doctors and an AI case-taking assistant, ORBIT, around a single secure health record — spanning modern medicine and AYUSH care, from first symptom to follow-up.</p>
+      <div class="principle-row">
+        <div class="pr"><strong>3</strong>experience modes by age</div>
+        <div class="pr"><strong>1</strong>connected health timeline</div>
+        <div class="pr"><strong>AI</strong>assists, doctors decide</div>
+      </div>
+      <div class="hero-visual">
+        <div class="orbit-hero">
+          <div class="ring r1"></div>
+          <div class="ring r2"></div>
+          <div class="ring r3"></div>
+          <div class="orbit-core"></div>
+          <div class="dot twinkle" style="top:6%; left:48%; color:#4A5CE0;"></div>
+          <div class="dot twinkle" style="top:70%; left:14%; color:#C8862A;"></div>
+          <div class="dot twinkle" style="top:30%; left:88%; color:#6E5BFF;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card card-hero login-card tilt-3d">
+      <h2>Sign in</h2>
+      <p class="text-muted" style="margin-bottom:16px;">Choose your role, then sign in with a demo account.</p>
+      <div class="role-tabs" id="role-tabs">
+        <div class="role-tab active" data-role="patient">Patient</div>
+        <div class="role-tab" data-role="doctor">Doctor</div>
+        <div class="role-tab" data-role="admin">Admin</div>
+      </div>
+
+      <form id="login-form">
+        <div class="field">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" placeholder="you@demo.aarogyaorbit.in" required />
+        </div>
+        <div class="field">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" placeholder="••••••••" required />
+        </div>
+        <p id="login-error" class="error-text" style="display:none;"></p>
+        <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+      </form>
+
+      <div class="demo-note" id="demo-note">
+        Patient demo — <code>aarav.patient@demo.aarogyaorbit.in</code> / <code>demo1234</code>
+      </div>
+    </div>
+  </div>
+
+  <footer class="landing-footer">
+    Hackathon prototype for Smart India Hackathon — not a certified medical device. AI never diagnoses or prescribes.
+  </footer>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  let selectedRole = "patient";
+  const demoNotes = {
+    patient: `Patient demo — <code>aarav.patient@demo.aarogyaorbit.in</code> / <code>demo1234</code>`,
+    doctor: `Doctor demo — <code>kavita.doctor@demo.aarogyaorbit.in</code> / <code>demo1234</code>`,
+    admin: `Admin demo — <code>admin@demo.aarogyaorbit.in</code> / <code>demo1234</code>`
+  };
+
+  document.querySelectorAll(".role-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+      document.querySelectorAll(".role-tab").forEach(t => t.classList.remove("active"));
+      tab.classList.add("active");
+      selectedRole = tab.dataset.role;
+      document.getElementById("demo-note").innerHTML = demoNotes[selectedRole];
+    });
+  });
+
+  // Ensure DB is seeded on first load
+  AO.db();
+
+  // If already logged in, route straight to dashboard
+  const existing = AoSession.get();
+  if(existing) aoRouteAfterLogin(existing);
+
+  document.getElementById("login-form").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const email = document.getElementById("login-email").value;
+    const password = document.getElementById("login-password").value;
+    const result = aoAttemptLogin(email, password, selectedRole);
+    const errorEl = document.getElementById("login-error");
+    if(!result.ok){
+      errorEl.textContent = result.reason;
+      errorEl.style.display = "block";
+      return;
+    }
+    errorEl.style.display = "none";
+    aoRouteAfterLogin(result.session);
+  });
+</script>
+</body>
+</html>

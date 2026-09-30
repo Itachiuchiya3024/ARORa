@@ -1,0 +1,48 @@
+/* =========================================================
+   Aarogya Orbit — Responsive Rules
+   ========================================================= */
+
+@media (max-width: 980px){
+  .grid-3{ grid-template-columns: repeat(2, 1fr); }
+  .grid-4{ grid-template-columns: repeat(2, 1fr); }
+  .grid-sidebar{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px){
+  .app-shell{ flex-direction:column; }
+  .sidebar{
+    width:100%; height:auto; position:sticky; top:0; flex-direction:row;
+    align-items:center; padding: var(--space-3) var(--space-4); z-index: 60;
+  }
+  .sidebar-brand{ margin-bottom:0; }
+  .sidebar-brand .brand-tag{ display:none; }
+  .nav-list{ display:none; }
+  .sidebar-footer{ margin-top:0; padding-top:0; border-top:none; margin-left:auto; }
+  .sidebar-role{ display:none; }
+  .sidebar-user .name, .sidebar-user .role{ display:none; }
+
+  .page-content{ padding: var(--space-4); }
+  .topbar{ padding: var(--space-3) var(--space-4); }
+  .grid-2, .grid-3, .grid-4{ grid-template-columns: 1fr; }
+
+  #orbit-panel{ width: calc(100vw - 32px); right:16px; }
+  #orbit-fab{ right:16px; bottom:16px; }
+
+  .quick-actions{ flex-direction:column; }
+  .list-row .row-meta{ text-align:left; margin-left:0; }
+  .list-row{ flex-wrap:wrap; }
+}
+
+@media (max-width: 760px){
+  /* On mobile, surface primary nav as a simple horizontal scroll strip appended by JS if needed */
+  .mobile-nav-strip{ display:flex; gap:8px; overflow-x:auto; padding: var(--space-3) var(--space-4); background: var(--surface); border-bottom:1px solid var(--line); }
+  .mobile-nav-strip a{ flex-shrink:0; padding:8px 14px; border-radius: var(--r-pill); background: var(--surface-3); font-size:.82rem; color: var(--text); text-decoration:none; font-weight:600; }
+  .mobile-nav-strip a.active{ background: var(--accent); color:#fff; }
+}
+@media (min-width: 761px){
+  .mobile-nav-strip{ display:none; }
+}
+
+@media (prefers-reduced-motion: reduce){
+  *{ animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+}

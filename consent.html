@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Consent & Privacy — Aarogya Orbit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/patient.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <aside class="sidebar" data-ao-sidebar></aside>
+  <div class="main-area">
+    <div data-ao-mobile-nav></div>
+    <div class="topbar"><h1>Consent &amp; Privacy</h1></div>
+    <main id="main" class="page-content" style="max-width:720px;">
+      <div class="badge badge-warn" style="margin-bottom:16px;">Demo environment — not for real patient data</div>
+      <div class="card">
+        <h3>What we collect</h3>
+        <p>Symptoms, medical history, medications, allergies and lifestyle details you share during case-taking, plus reports you upload.</p>
+        <h3>Why we collect it</h3>
+        <p>So your doctor has a complete, organized picture of your health before and during your visit.</p>
+        <h3>Who can access it</h3>
+        <ul class="consent-list">
+          <li>You — always, for your own records.</li>
+          <li>Your assigned doctor — for the visits you're linked to.</li>
+          <li>Hospital admin — for authorized, hospital-level administration only.</li>
+        </ul>
+        <h3>How AI is used</h3>
+        <p>ORBIT, our AI assistant, helps organize what you type into structured fields and prepares a summary for your doctor. ORBIT does not diagnose conditions or recommend medicines. <strong>AI-generated summaries must always be verified by a doctor before any clinical decision.</strong></p>
+        <h3>Your control</h3>
+        <p>You can review the information linked to your account at any time from your dashboard.</p>
+        <hr class="divider" />
+        <label style="display:flex; align-items:flex-start; gap:10px; font-weight:400;">
+          <input type="checkbox" id="consent-checkbox" style="width:auto; margin-top:3px;" />
+          <span>I understand and consent to the collection and use of my information as described above, for this demo environment.</span>
+        </label>
+        <button class="btn btn-primary" id="consent-save" style="margin-top:14px;">Save preference</button>
+        <p id="consent-status" class="text-muted" style="margin-top:10px;"></p>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  const session = AoSession.requireRole(["patient"]);
+  if(session){
+    aoRenderShell("consent");
+    aoApplyStoredMode();
+    const db = AO.db();
+    const existing = db.consent[session.patientId];
+    const checkbox = document.getElementById("consent-checkbox");
+    const status = document.getElementById("consent-status");
+    if(existing && existing.given){
+      checkbox.checked = true;
+      status.textContent = "Consent recorded on " + aoFormatDate(existing.date) + ".";
+    }
+    document.getElementById("consent-save").addEventListener("click", () => {
+      const dbNow = AO.db();
+      dbNow.consent[session.patientId] = { given: checkbox.checked, date: new Date().toISOString().slice(0,10) };
+      AO.save(dbNow);
+      AO.log(session.name, "Updated consent preference", checkbox.checked ? "Consented" : "Withdrew consent");
+      status.textContent = checkbox.checked ? "Thanks — your preference has been saved." : "Your consent has been withdrawn. Some features may be limited.";
+      aoToast("Preference saved.", "success");
+    });
+  }
+</script>
+</body>
+</html>

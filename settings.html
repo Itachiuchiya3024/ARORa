@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Settings — Aarogya Orbit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/patient.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <aside class="sidebar" data-ao-sidebar></aside>
+  <div class="main-area">
+    <div data-ao-mobile-nav></div>
+    <div class="topbar"><h1>Settings</h1></div>
+    <main id="main" class="page-content" style="max-width:640px;">
+      <div class="card" style="margin-bottom:20px;">
+        <h3>Account</h3>
+        <div class="field"><label>Name</label><input type="text" id="set-name" disabled /></div>
+        <div class="field"><label>Email</label><input type="text" id="set-email" disabled /></div>
+        <div class="field"><label>Role</label><input type="text" id="set-role" disabled /></div>
+      </div>
+      <div class="card" style="margin-bottom:20px;">
+        <h3>Appearance</h3>
+        <label style="display:flex; align-items:center; gap:10px; font-weight:400;">
+          <input type="checkbox" id="dark-mode-toggle" style="width:auto;" /> Dark mode
+        </label>
+      </div>
+      <div class="card">
+        <h3>Reset demo data</h3>
+        <p class="text-muted">Restores all fictional demo patients, doctors, and records to their original state. Useful between hackathon demo runs.</p>
+        <button class="btn btn-danger" id="reset-demo-btn">Reset demo data</button>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script>
+  const session = AoSession.requireRole(["patient","doctor","admin"]);
+  if(session){
+    aoRenderShell("settings");
+    if(session.mode) aoApplyStoredMode?.();
+    document.getElementById("set-name").value = session.name;
+    document.getElementById("set-email").value = session.email;
+    document.getElementById("set-role").value = session.role;
+
+    const darkToggle = document.getElementById("dark-mode-toggle");
+    darkToggle.checked = localStorage.getItem("AO_THEME") === "dark";
+    if(darkToggle.checked) document.documentElement.setAttribute("data-theme","dark");
+    darkToggle.addEventListener("change", () => {
+      if(darkToggle.checked){
+        document.documentElement.setAttribute("data-theme","dark");
+        localStorage.setItem("AO_THEME","dark");
+      } else {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("AO_THEME","light");
+      }
+    });
+
+    document.getElementById("reset-demo-btn").addEventListener("click", () => {
+      aoOpenModal(`
+        <h3>Reset all demo data?</h3>
+        <p>This restores every fictional patient, doctor, case and appointment to the original demo state. This cannot be undone.</p>
+        <div class="flex gap-3">
+          <button class="btn btn-danger" id="confirm-reset">Yes, reset</button>
+          <button class="btn btn-secondary" id="cancel-reset">Cancel</button>
+        </div>
+      `);
+      document.getElementById("cancel-reset").addEventListener("click", aoCloseModal);
+      document.getElementById("confirm-reset").addEventListener("click", () => {
+        AO.reset();
+        AoSession.clear();
+        aoCloseModal();
+        aoToast("Demo data reset.", "success");
+        setTimeout(() => window.location.href = "index.html", 900);
+      });
+    });
+  }
+</script>
+</body>
+</html>

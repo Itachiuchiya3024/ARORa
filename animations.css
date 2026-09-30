@@ -1,0 +1,108 @@
+/* =========================================================
+   Aarogya Orbit — 3D & Motion Library
+   Shared keyframes + utility classes used across all 3 modes.
+   Pure CSS 3D (perspective/transform-style) + a tiny JS tilt
+   helper in app.js. Respects prefers-reduced-motion (see
+   responsive.css) — everything here degrades to a static
+   frame when that's set.
+   ========================================================= */
+
+/* ---------------- Perspective stage ---------------- */
+.stage-3d{ perspective: 1200px; }
+.tilt-3d{
+  transform-style: preserve-3d;
+  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+  will-change: transform;
+}
+.tilt-3d:hover{ box-shadow: var(--shadow-lift); }
+
+/* ---------------- Orbit hero (rotating rings + core) ---------------- */
+.orbit-hero{
+  position: relative; width: 100%; aspect-ratio: 1/1; max-width: 340px; margin: 0 auto;
+  perspective: 900px;
+}
+.orbit-hero .orbit-core{
+  position:absolute; inset: 38%; border-radius:50%;
+  background: radial-gradient(circle at 30% 30%, #8C9BFF, var(--accent) 60%, var(--accent-strong));
+  box-shadow: 0 0 40px rgba(74,92,224,.55), inset 0 0 20px rgba(255,255,255,.35);
+  animation: ao-pulse 3.2s ease-in-out infinite;
+}
+.orbit-hero .ring{
+  position:absolute; inset:0; border-radius:50%;
+  border: 2px solid var(--accent);
+  opacity:.55;
+  transform-style: preserve-3d;
+}
+.orbit-hero .ring.r1{ animation: ao-spin-x 9s linear infinite; }
+.orbit-hero .ring.r2{ inset: 8%; border-color: var(--gold); animation: ao-spin-y 7s linear infinite reverse; opacity:.5; }
+.orbit-hero .ring.r3{ inset: 16%; border-color: #6E5BFF; animation: ao-spin-x 5.5s linear infinite; opacity:.4; }
+.orbit-hero .dot{ position:absolute; width:10px; height:10px; border-radius:50%; background:#fff; box-shadow:0 0 10px currentColor; }
+.orbit-hero.small{ max-width:46px; }
+.orbit-hero.small .dot{ width:5px; height:5px; }
+
+@keyframes ao-spin-x{ from{ transform: rotateX(0deg); } to{ transform: rotateX(360deg); } }
+@keyframes ao-spin-y{ from{ transform: rotateY(0deg); } to{ transform: rotateY(360deg); } }
+@keyframes ao-pulse{ 0%,100%{ transform: scale(1); } 50%{ transform: scale(1.08); } }
+
+/* ---------------- Floating shapes (kid / youth backgrounds) ---------------- */
+.float-layer{ position:absolute; inset:0; overflow:hidden; pointer-events:none; z-index:0; }
+.float-shape{ position:absolute; animation: ao-float 6s ease-in-out infinite; opacity:.65; }
+@keyframes ao-float{
+  0%,100%{ transform: translateY(0) rotate(0deg); }
+  50%{ transform: translateY(-22px) rotate(8deg); }
+}
+@keyframes ao-float-slow{
+  0%,100%{ transform: translateY(0) translateX(0) rotate(0deg); }
+  50%{ transform: translateY(-14px) translateX(8px) rotate(-6deg); }
+}
+.float-shape.slow{ animation: ao-float-slow 9s ease-in-out infinite; }
+
+/* ---------------- Twinkle (stars) ---------------- */
+@keyframes ao-twinkle{ 0%,100%{ opacity:.25; transform: scale(.8); } 50%{ opacity:1; transform: scale(1.15); } }
+.twinkle{ animation: ao-twinkle 2.4s ease-in-out infinite; }
+
+/* ---------------- Neon glow pulse (youth / genz) ---------------- */
+@keyframes ao-glow-pulse{
+  0%,100%{ box-shadow: 0 0 8px rgba(110,91,255,.4), 0 0 22px rgba(110,91,255,.15); }
+  50%{ box-shadow: 0 0 18px rgba(110,91,255,.75), 0 0 40px rgba(110,91,255,.35); }
+}
+.glow-pulse{ animation: ao-glow-pulse 2.6s ease-in-out infinite; }
+
+/* ---------------- Animated gradient text ---------------- */
+.gradient-text{
+  background: linear-gradient(90deg, #6E5BFF, #FF6FD8, #4AE0D4, #6E5BFF);
+  background-size: 300% 100%;
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  animation: ao-gradient-shift 6s linear infinite;
+}
+@keyframes ao-gradient-shift{ 0%{ background-position: 0% 50%; } 100%{ background-position: 300% 50%; } }
+
+/* ---------------- Shine sweep (classic elegance) ---------------- */
+.shine-sweep{ position:relative; overflow:hidden; }
+.shine-sweep::after{
+  content:""; position:absolute; top:0; left:-60%; width:40%; height:100%;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.5), transparent);
+  transform: skewX(-20deg);
+  transition: left .7s ease;
+  pointer-events:none;
+}
+.shine-sweep:hover::after{ left: 130%; }
+
+/* ---------------- Bounce-in (kid entrance) ---------------- */
+@keyframes ao-bounce-in{
+  0%{ transform: scale(.4) rotate(-8deg); opacity:0; }
+  60%{ transform: scale(1.08) rotate(3deg); opacity:1; }
+  100%{ transform: scale(1) rotate(0deg); }
+}
+.bounce-in{ animation: ao-bounce-in .6s cubic-bezier(.3,1.6,.5,1) both; }
+
+/* ---------------- Wiggle (kid buddy idle) ---------------- */
+@keyframes ao-wiggle{
+  0%,100%{ transform: rotate(-3deg) translateY(0); }
+  50%{ transform: rotate(3deg) translateY(-4px); }
+}
+.wiggle{ animation: ao-wiggle 1.8s ease-in-out infinite; transform-origin: 50% 90%; }
+
+/* ---------------- Card flip (used sparingly) ---------------- */
+.flip-3d{ transform-style: preserve-3d; transition: transform .5s; }
+.flip-3d.flipped{ transform: rotateY(180deg); }

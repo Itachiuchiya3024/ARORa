@@ -1,0 +1,153 @@
+/* =========================================================
+   Aarogya Orbit — Patient Experience Modes (v2, animated)
+   Junior Care (playful, original chibi space-buddy) /
+   Youth Mode (Gen-Z, neon, glassy, 3D tilt) /
+   Classic Care (elegant, gold-accented, refined 3D depth)
+   Applied via a class on <body>: mode-junior | mode-youth | mode-classic
+   ========================================================= */
+
+/* ---------------- Mode switcher (dashboard) ---------------- */
+.mode-switcher{ display:flex; gap: var(--space-3); flex-wrap:wrap; }
+.mode-option{
+  flex:1; min-width:170px; border:2px solid var(--line); border-radius: var(--r-md);
+  padding: var(--space-4); cursor:pointer; background: var(--surface); text-align:left;
+  transform-style: preserve-3d; transition: transform .25s ease, box-shadow .25s ease, border-color .2s;
+  position:relative; overflow:hidden;
+}
+.mode-option:hover{ transform: translateY(-4px) rotateX(4deg); box-shadow: var(--shadow-lift); }
+.mode-option.active{ border-color: var(--accent); background: var(--accent-tint); }
+.mode-option .mo-title{ font-weight:700; font-family: var(--font-display); display:flex; align-items:center; gap:8px; }
+.mode-option .mo-desc{ font-size:.82rem; color: var(--text-muted); }
+.mode-option .mo-emoji{ font-size:1.3rem; }
+
+/* =========================================================
+   JUNIOR CARE — vivid, bouncy, original chibi space buddy
+   (No copyrighted characters — Orbie is an original design;
+   the vibe borrows playful anime-kid energy, not the artwork.)
+   ========================================================= */
+body.mode-junior{
+  --accent: #FF6F3D;
+  --accent-strong: #E6501C;
+  --accent-tint: #FFEFE0;
+  --gold: #FFC93C;
+  font-size: 1.06rem;
+  background:
+    radial-gradient(circle at 10% 15%, #FFE29A 0%, transparent 45%),
+    radial-gradient(circle at 90% 10%, #B6F2D0 0%, transparent 40%),
+    radial-gradient(circle at 50% 100%, #C9E4FF 0%, transparent 50%),
+    #FFF9EF;
+}
+body.mode-junior .sidebar{ background: linear-gradient(180deg,#3A2A80,#241659); }
+body.mode-junior .nav-list a.active{ background: var(--accent); }
+body.mode-junior h1, body.mode-junior h2, body.mode-junior h3{ font-family: var(--font-display); }
+body.mode-junior .btn{ border-radius: 22px; padding: 14px 22px; font-size: 1.05rem; box-shadow: 0 4px 0 rgba(0,0,0,.12); }
+body.mode-junior .btn:active{ transform: translateY(3px); box-shadow: none; }
+body.mode-junior .btn-primary{ background: linear-gradient(135deg,#FF9A5A,#FF6F3D); }
+body.mode-junior .card{ border-radius: 26px; border-width: 2px; border-color:#FFD9A0; }
+body.mode-junior .quick-action{ border-radius: 22px; border-width:2px; border-color:#FFD9A0; background: linear-gradient(180deg,#fff,#FFF7EC); }
+body.mode-junior .quick-action:hover{ transform: translateY(-6px) scale(1.03) rotate(-1deg); }
+body.mode-junior .badge-accent{ background:#FFE29A; color:#A15B00; }
+body.mode-junior .stat-card .stat-value{ color: var(--accent-strong); }
+
+/* ---- Orbie: original chibi space-buddy character ---- */
+body.mode-junior .junior-buddy{
+  position:relative; display:flex; align-items:center; gap: var(--space-4);
+  background: linear-gradient(135deg,#FFE1B8,#FFF3E0);
+  border-radius: 28px; padding: var(--space-5); border:3px solid #FFCB7D; overflow:hidden;
+}
+body.mode-junior .junior-buddy::before{
+  content:"✦"; position:absolute; top:10px; right:20px; font-size:1.4rem; color:#FFC93C; animation: ao-twinkle 2s infinite;
+}
+body.mode-junior .junior-buddy::after{
+  content:"✦"; position:absolute; bottom:14px; right:60px; font-size:.9rem; color:#FF9A5A; animation: ao-twinkle 2.6s infinite 1s;
+}
+body.mode-junior .buddy-wrap{ width:100px; height:100px; flex-shrink:0; }
+body.mode-junior .buddy-wrap svg{ width:100%; height:100%; }
+
+/* Junior quick-action icon bounce */
+body.mode-junior .quick-action .qa-icon svg{ animation: ao-wiggle 2.4s ease-in-out infinite; }
+
+/* Floating background stickers on junior dashboard */
+body.mode-junior .kid-float-1{ top:6%; left:4%; font-size:2.2rem; }
+body.mode-junior .kid-float-2{ top:60%; left:2%; font-size:1.6rem; }
+body.mode-junior .kid-float-3{ top:12%; right:5%; font-size:1.8rem; }
+body.mode-junior .kid-float-4{ bottom:8%; right:8%; font-size:2rem; }
+
+/* =========================================================
+   YOUTH MODE — Gen-Z: neon glass, 3D tilt cards, holographic
+   ========================================================= */
+body.mode-youth{
+  --accent: #7C5CFF;
+  --accent-strong: #5A3FE0;
+  --accent-tint: rgba(124,92,255,.12);
+  --gold: #4AE0D4;
+  background:
+    radial-gradient(circle at 15% -5%, rgba(124,92,255,.18) 0%, transparent 45%),
+    radial-gradient(circle at 90% 0%, rgba(74,224,212,.14) 0%, transparent 40%),
+    linear-gradient(180deg,#0E0B22 0%, #14102C 100%);
+  color: #EDEBFF;
+}
+body.mode-youth .text-muted{ color: #A79FE0; }
+body.mode-youth p{ color:#D9D5FF; }
+body.mode-youth .topbar, body.mode-youth .main-area{ background: transparent; }
+body.mode-youth .topbar{ background: rgba(20,16,44,.7); backdrop-filter: blur(10px); border-bottom: 1px solid rgba(124,92,255,.25); }
+body.mode-youth .sidebar{ background: linear-gradient(180deg,#0E0B22,#080614); border-right: 1px solid rgba(124,92,255,.2); }
+body.mode-youth h1, body.mode-youth h2, body.mode-youth h3{ font-family: var(--font-display); letter-spacing:-0.02em; color:#fff; }
+body.mode-youth .card, body.mode-youth .card-flat{
+  background: rgba(255,255,255,.05); border: 1px solid rgba(124,92,255,.35);
+  backdrop-filter: blur(14px); border-radius: 18px; color:#EDEBFF;
+}
+body.mode-youth .card:hover{ transform: translateY(-6px) rotateX(3deg) rotateY(-2deg); box-shadow: 0 0 30px rgba(124,92,255,.35), var(--shadow-lift); }
+body.mode-youth .quick-action{
+  border-radius: 18px; background: rgba(255,255,255,.05); border:1px solid rgba(124,92,255,.35);
+  backdrop-filter: blur(10px); color:#EDEBFF;
+}
+body.mode-youth .quick-action:hover{ transform: translateY(-6px) rotateX(4deg); box-shadow: 0 0 26px rgba(124,92,255,.4); border-color:#7C5CFF; }
+body.mode-youth .quick-action .qa-title{ color:#fff; }
+body.mode-youth small, body.mode-youth .row-sub{ color:#A79FE0; }
+body.mode-youth .list-row{ border-bottom-color: rgba(124,92,255,.18); }
+body.mode-youth .badge-accent{ background: rgba(124,92,255,.18); color:#C9BFFF; }
+body.mode-youth .btn-primary{ background: linear-gradient(135deg,#7C5CFF,#4AE0D4); border:none; }
+body.mode-youth .btn-secondary{ background: rgba(255,255,255,.06); border-color: rgba(124,92,255,.4); color:#EDEBFF; }
+body.mode-youth .btn-secondary:hover{ border-color:#4AE0D4; color:#4AE0D4; }
+body.mode-youth input, body.mode-youth select, body.mode-youth textarea{
+  background: rgba(255,255,255,.06); border-color: rgba(124,92,255,.35); color:#fff;
+}
+body.mode-youth .stat-card .stat-value{ background: linear-gradient(90deg,#7C5CFF,#4AE0D4); -webkit-background-clip:text; background-clip:text; color:transparent; }
+body.mode-youth .pill-choice{ background: rgba(255,255,255,.06); border-color: rgba(124,92,255,.35); color:#EDEBFF; }
+body.mode-youth .pill-choice.active{ background: rgba(124,92,255,.25); border-color:#7C5CFF; color:#fff; }
+body.mode-youth .chat-bubble.ai{ background: rgba(124,92,255,.15); color:#EDEBFF; border:1px solid rgba(124,92,255,.3); }
+body.mode-youth .divider{ background: rgba(124,92,255,.2); }
+body.mode-youth #dash-greeting{
+  background: linear-gradient(90deg,#7C5CFF,#4AE0D4,#FF6FD8,#7C5CFF); background-size:300% 100%;
+  -webkit-background-clip:text; background-clip:text; color:transparent; animation: ao-gradient-shift 6s linear infinite;
+}
+body.mode-youth #orbit-fab{ box-shadow: 0 0 20px rgba(124,92,255,.6); }
+
+/* =========================================================
+   CLASSIC CARE — elegant, gold-accented, refined 3D depth
+   ========================================================= */
+body.mode-classic{
+  --accent: #33407E;
+  --accent-strong: #232C5C;
+  --accent-tint: #EEF0F9;
+  --gold: #B8892F;
+  background:
+    radial-gradient(circle at 50% -10%, rgba(184,137,47,.06) 0%, transparent 40%),
+    #FBFAF6;
+}
+body.mode-classic .sidebar{ background: linear-gradient(180deg,#1B1D22,#14151A); border-right: 1px solid rgba(184,137,47,.25); }
+body.mode-classic .sidebar-brand .brand-name{ letter-spacing:.02em; }
+body.mode-classic h1, body.mode-classic h2, body.mode-classic h3{ font-family: "Sora", serif; letter-spacing:-.005em; }
+body.mode-classic .card{
+  border-radius: 12px; box-shadow: 0 1px 0 rgba(184,137,47,.15), var(--shadow-soft);
+  border:1px solid var(--line); transform-style: preserve-3d; transition: transform .3s ease, box-shadow .3s ease;
+}
+body.mode-classic .card:hover{ transform: translateY(-3px) rotateX(1.4deg); box-shadow: var(--shadow-lift); }
+body.mode-classic .btn{ border-radius: 7px; }
+body.mode-classic .btn-primary{ background: linear-gradient(135deg,#3A4890,#242D63); }
+body.mode-classic .btn-gold{ background: linear-gradient(135deg,#D3A24E,#B8892F); }
+body.mode-classic .quick-action{ border-radius: 10px; position:relative; }
+body.mode-classic .quick-action:hover{ transform: translateY(-4px); border-color:#B8892F; }
+body.mode-classic .badge-gold{ background:#F7EEDA; color:#8A6420; }
+body.mode-classic hr.divider{ background: linear-gradient(90deg, transparent, rgba(184,137,47,.4), transparent); height:1px; }

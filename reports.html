@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Reports — Aarogya Orbit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="css/dashboard.css" />
+<link rel="stylesheet" href="css/patient.css" />
+<link rel="stylesheet" href="css/animations.css" />
+<link rel="stylesheet" href="css/responsive.css" />
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="app-shell">
+  <aside class="sidebar" data-ao-sidebar></aside>
+  <div class="main-area">
+    <div data-ao-mobile-nav></div>
+    <div class="topbar"><h1>Medical Reports</h1></div>
+    <main id="main" class="page-content">
+      <div class="grid grid-sidebar">
+        <div class="card">
+          <h3>Your reports</h3>
+          <div id="reports-list"></div>
+        </div>
+        <div class="card">
+          <h3>Upload a report</h3>
+          <p class="text-muted" style="font-size:.85rem;">Simulated upload for this prototype — no file is actually stored.</p>
+          <form id="upload-report-form">
+            <div class="field">
+              <label for="report-name">Report name</label>
+              <input type="text" id="report-name" placeholder="e.g. Blood Sugar Test - Sept 2026" required />
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Add report</button>
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/app.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/appointments.js"></script>
+<script>aoRenderReportsPage();</script>
+</body>
+</html>
